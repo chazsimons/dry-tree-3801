@@ -20,6 +20,7 @@ RSpec.describe 'Doctor Show Page' do
     @dp_2 = DoctorPatient.create!({doctor_id: @doc_1.id, patient_id: @patient_2.id})
     @dp_3 = DoctorPatient.create!({doctor_id: @doc_1.id, patient_id: @patient_4.id})
     @dp_4 = DoctorPatient.create!({doctor_id: @doc_2.id, patient_id: @patient_3.id})
+    @dp_5 = DoctorPatient.create!({doctor_id: @doc_4.id, patient_id: @patient_1.id})
   end
 
   it 'displays a single doctor and their attributes' do
