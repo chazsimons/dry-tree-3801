@@ -50,7 +50,7 @@ RSpec.describe 'Doctor Show Page' do
     within("#patient-#{@patient_1.id}") do
       click_button "Remove Patient"
     end
-    expect(current_path).to be("/doctors/#{@doc_1.id}")
+    expect(current_path).to eq("/doctors/#{@doc_1.id}")
     expect(page).to_not have_content(@patient_1.name)
   end
 end
