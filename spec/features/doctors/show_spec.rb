@@ -35,8 +35,19 @@ RSpec.describe 'Doctor Show Page' do
   it 'displays a single doctor and their attributes' do
     visit "/doctors/#{@doc_1.id}"
 
+    expect(page).to have_content(@gh.name)
     expect(page).to have_content(@doc_1.name)
     expect(page).to have_content(@doc_1.specialty)
     expect(page).to have_content(@doc_1.university)
+    expect(page).to_not have_content(@doc_2.name)
+    expect(page).to_not have_content(@childrens.name)
+  end
+
+  it 'displays a list of patients being treated by that doctor' do
+    visit "/doctors/#{@doc_1.id}"
+
+    expect(page).to have_content(@patient_1.name)
+    expect(page).to have_content(@patient_2.name)
+    expect(page).to_not have_content(@patient_3.name)
   end
 end

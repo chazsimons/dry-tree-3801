@@ -1,0 +1,11 @@
+<h3>Finger on the pulse! Doctor Information</h3><hr>
+
+Doctor: <%= @doctor.name %><br>
+Attending at: <%= @doctor.hospital.name %><br>
+Specialty: <%= @doctor.specialty %><br>
+Attended: <%= @doctor.university %><br>
+<br>
+Now treating:
+<% @doctor.patients.each do |patient| %>
+<p><%= patient.name %></p>
+<% end %>
