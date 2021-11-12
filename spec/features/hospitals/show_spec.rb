@@ -35,4 +35,10 @@ RSpec.describe 'Hospital Show Page' do
     expect(page).to have_content(@childrens.name)
     expect(page).to_not have_content(@gh.name)
   end
+
+  it 'has a count of its doctors' do
+    visit "/hospitals/#{@childrens.id}"
+
+    expect(page).to have_content("Number of Doctors in Residence: #{@childrens.doc_count}")
+  end
 end
