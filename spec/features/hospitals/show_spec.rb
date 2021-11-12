@@ -14,8 +14,8 @@ RSpec.describe 'Hospital Show Page' do
     @childrens = Hospital.create({name: 'Childrens Hospital'})
 
     @doc_1 = Doctor.create!({name: 'Donovan Doctor', specialty: 'General Practice', university: 'Stanford Law', hospital_id: @gh.id})
-    @doc_2 = Doctor.create!({name: 'Greg House', specialty: 'Crabby Specialist', university: 'Oxford', hospital_id: @gh.id})
-    @doc_3 = Doctor.create!({name: 'Sandra Who', specialty: 'Time Surgery', university: 'TARDIS University', hospital_id: @scrubs.id})
+    @doc_2 = Doctor.create!({name: 'Greg House', specialty: 'Crabby Specialist', university: 'Oxford', hospital_id: @childrens.id})
+    @doc_3 = Doctor.create!({name: 'Sandra Who', specialty: 'Time Surgery', university: 'TARDIS University', hospital_id: @childrens.id})
     @doc_4 = Doctor.create!({name: 'Lola Spratt', specialty: 'Pediactric Surgery', university: 'Clown College School of Medicine', hospital_id: @childrens.id})
 
     @patient_1 = Patient.create!({name: 'Joe Somebody', age: 55})
@@ -40,5 +40,15 @@ RSpec.describe 'Hospital Show Page' do
     visit "/hospitals/#{@childrens.id}"
 
     expect(page).to have_content("Number of Doctors in Residence: #{@childrens.doc_count}")
+  end
+
+  it 'displays a list of unique schools its doctors attended' do
+    doc_5 = Doctor.create!({name: 'Owen Maestro', specialty: 'Rhinoplasty', university: 'Clown College School of Medicine', hospital_id: @childrens.id})
+
+    visit "/hospitals/#{@childrens.id}"
+
+    expect(page).to have_content(@doc_3.university)
+    expect(page).to have_content(@doc_4.university, count: 1)
+    expect(page).to have_content(@doc_2.university)
   end
 end

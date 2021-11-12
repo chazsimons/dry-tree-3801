@@ -3,6 +3,6 @@
 Number of Doctors in Residence: <%= @hospital.doc_count %><br>
 <br>
 Doctors Alma Matters:<br>
-  <%# @hospital.uni.each do |university| %>
-  <p><%#= university.name %></p>
-  <%# end %>
+  <% @hospital.unique_schools.each do |university| %>
+  <p><%= university.name %></p>
+  <% end %>
