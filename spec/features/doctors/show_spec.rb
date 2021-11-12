@@ -1,13 +1,3 @@
-# User Story 1, Doctors Show Page
-# ​
-# As a visitor
-# When I visit a doctor's show page
-# I see all of that doctor's information including:
-#  - name
-#  - specialty
-#  - university where they got their doctorate
-# And I see the name of the hospital where this doctor works
-# And I see the names of all of the patients this doctor has
 require 'rails_helper'
 
 RSpec.describe 'Doctor Show Page' do
@@ -49,5 +39,18 @@ RSpec.describe 'Doctor Show Page' do
     expect(page).to have_content(@patient_1.name)
     expect(page).to have_content(@patient_2.name)
     expect(page).to_not have_content(@patient_3.name)
+  end
+
+  it 'has a button to remove a patient from a doctor' do
+    visit "/doctors/#{@doc_1.id}"
+
+    expect(page).to have_content(@patient_1.name)
+    expect(page).to have_button("Remove Patient")
+
+    within("#patient-#{@patient_1.id}") do
+      click_button "Remove Patient"
+    end
+    expect(current_path).to be("/doctors/#{@doc_1.id}")
+    expect(page).to_not have_content(@patient_1.name)
   end
 end
